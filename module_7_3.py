@@ -5,7 +5,7 @@ class WordsFinder:
     def get_all_words(self):
         all_words = {}
         l = ''
-        punc = [',', '.', '=', '!', '?', ';', ':', ' - ','\n']
+        punc = [',', '.', '=', '!', '?', ';', ':', ' - ']
         with open(self.file_names, encoding='utf-8') as file:
             for line in file:
                 line = line.lower()
@@ -14,6 +14,7 @@ class WordsFinder:
                         line = line.replace(i,'')
                 l = l + line
             all_words.update({self.file_names:l.split()})
+
         return all_words
                 # print(all_words)
     def find(self,txt):
@@ -28,10 +29,8 @@ class WordsFinder:
         dist = {}
         n = 1
         world = self.get_all_words()[self.file_names]
-        for i in range(len(world)):
-            if txt.lower() == world[i]:
-                n +=1
-        dist.update({self.file_names: n})
+        dist.update({self.file_names: world.count(txt.lower())})
+        # dist.update({self.file_names: n})
         return dist
 
 
